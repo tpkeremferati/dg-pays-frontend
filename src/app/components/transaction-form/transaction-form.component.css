@@ -1,0 +1,18 @@
+.full-width {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  .result {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #e7f3e7;
+    border: 1px solid #b4dfb4;
+    border-radius: 6px;
+  }
+  
+  .error {
+    color: red;
+    margin-top: 10px;
+  }
+  
