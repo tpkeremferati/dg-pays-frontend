@@ -1,41 +1,46 @@
-<form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+<div class="transaction-wrapper">
+  <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Cardholder Name</mat-label>
       <input matInput formControlName="cardholderName" required>
     </mat-form-field>
-  
+
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>PAN (Card Number)</mat-label>
-      <input matInput formControlName="pan" required>
+      <input matInput formControlName="cardNumber" required>
     </mat-form-field>
-  
+
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Expiry Date (MM/YY)</mat-label>
       <input matInput formControlName="expiryDate" required>
     </mat-form-field>
-  
+
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Amount</mat-label>
       <input matInput type="number" formControlName="amount" required>
     </mat-form-field>
-  
+
     <button mat-raised-button color="primary" type="submit" [disabled]="transactionForm.invalid">
       Submit Transaction
     </button>
   </form>
-  
-  <!-- Result Section -->
+
   <div *ngIf="result" class="result">
     <h3>Transaction Result</h3>
-    <p><strong>Masked PAN:</strong> {{ result.cardMasked }}</p>
+    <p><strong>Masked PAN:</strong> {{ result.maskedCardNumber }}</p>
     <p><strong>Transaction ID:</strong> {{ result.transactionId }}</p>
     <p><strong>Amount:</strong> {{ result.amount }}</p>
     <p><strong>Response Code:</strong> {{ result.responseCode }}</p>
     <p><strong>Timestamp:</strong> {{ result.timestamp }}</p>
   </div>
-  
-  <!-- Error Message -->
+
   <div *ngIf="errorMessage" class="error">
     {{ errorMessage }}
   </div>
-  
+
+  <div class="back-container">
+    <button mat-stroked-button color="primary" routerLink="/" class="back-button">
+      ⬅ Back to Home
+    </button>
+  </div>
+</div>

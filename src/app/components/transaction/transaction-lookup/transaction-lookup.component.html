@@ -1,0 +1,27 @@
+<form [formGroup]="lookupForm" (ngSubmit)="onSubmit()" class="lookup-form">
+    <mat-form-field appearance="fill">
+      <mat-label>Transaction ID</mat-label>
+      <input matInput formControlName="transactionId" required placeholder="Enter Transaction ID">
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" type="submit" [disabled]="lookupForm.invalid">
+      Lookup
+    </button>
+  </form>
+  
+  <div *ngIf="result" class="result-box">
+    <h3>Transaction Details</h3>
+    <p><strong>Transaction ID:</strong> {{ result.transactionId }}</p>
+    <p><strong>Masked Card:</strong> {{ result.maskedCardNumber }}</p>
+    <p><strong>Amount:</strong> {{ result.amount | currency }}</p>
+    <p><strong>Response Code:</strong> {{ result.responseCode }}</p>
+    <p><strong>Timestamp:</strong> {{ result.timestamp | date:'short' }}</p>
+  </div>
+  
+  <div *ngIf="errorMessage" class="error-box">
+    {{ errorMessage }}
+  </div>
+  
+  <button mat-stroked-button color="primary" routerLink="/" class="back-button">
+    ⬅ Back to Home
+  </button>

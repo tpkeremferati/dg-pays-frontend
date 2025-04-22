@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Transaction Result</h2>
+
+<div mat-dialog-content>
+  <p><strong>Transaction ID:</strong> {{ data.transactionId }}</p>
+  <p><strong>Masked PAN:</strong> {{ data.maskedCardNumber }}</p>
+  <p><strong>Amount:</strong> {{ data.amount | currency }}</p>
+  <p><strong>Response Code:</strong> {{ data.responseCode }}</p>
+  <p><strong>Timestamp:</strong> {{ data.timestamp | date:'short' }}</p>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</div>

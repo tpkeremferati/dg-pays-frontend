@@ -1,0 +1,72 @@
+<div class="transaction-list-wrapper">
+  <h2>Transaction Filter</h2>
+
+  <form [formGroup]="filterForm" (ngSubmit)="onFilter()" class="filter-form">
+    <div class="filter-grid">
+      <mat-form-field appearance="fill">
+        <mat-label>Start Date</mat-label>
+        <input matInput [matDatepicker]="startPicker" formControlName="startDate">
+        <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+        <mat-datepicker #startPicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>End Date</mat-label>
+        <input matInput [matDatepicker]="endPicker" formControlName="endDate">
+        <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+        <mat-datepicker #endPicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Min Amount</mat-label>
+        <input matInput type="number" formControlName="minAmount">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Max Amount</mat-label>
+        <input matInput type="number" formControlName="maxAmount">
+      </mat-form-field>
+
+      <div class="button-container">
+        <button mat-raised-button color="primary" type="submit">Apply Filter</button>
+      </div>
+    </div>
+  </form>
+
+  <mat-progress-spinner *ngIf="loading" mode="indeterminate"></mat-progress-spinner>
+  <div *ngIf="error" class="error-box">{{ error }}</div>
+
+  <table mat-table [dataSource]="transactions" class="mat-elevation-z2" *ngIf="!loading && transactions.length">
+    <ng-container matColumnDef="transactionId">
+      <th mat-header-cell *matHeaderCellDef>Transaction ID</th>
+      <td mat-cell *matCellDef="let tx">{{ tx.transactionId }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="maskedCardNumber">
+      <th mat-header-cell *matHeaderCellDef>Card</th>
+      <td mat-cell *matCellDef="let tx">{{ tx.maskedCardNumber }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef>Amount</th>
+      <td mat-cell *matCellDef="let tx">{{ tx.amount | currency }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="responseCode">
+      <th mat-header-cell *matHeaderCellDef>Response</th>
+      <td mat-cell *matCellDef="let tx">{{ tx.responseCode }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="timestamp">
+      <th mat-header-cell *matHeaderCellDef>Timestamp</th>
+      <td mat-cell *matCellDef="let tx">{{ tx.timestamp | date:'short' }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <div class="back-container">
+    <button mat-stroked-button color="primary" routerLink="">⬅ Back to Home</button>
+  </div>
+</div>
